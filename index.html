@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Gay?</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css untuk animasi tambahan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Font Awesome untuk ikon tambahan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p.lead {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        #yesButton, #noButton {
+            padding: 0.6rem 1.5rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 0.5rem;
+            border: none;
+        }
+
+        #yesButton {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+        }
+
+        /* Hover efek dan animasi tambahan */
+        #yesButton:hover {
+            transform: scale(1.1);
+            background-color: #218838;
+        }
+
+        #noButton:hover {
+            transform: scale(1.1);
+            background-color: #c82333;
+        }
+
+        /* Efek menghindar dengan animasi halus */
+        #noButton.animate-move {
+            transition: transform 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInDown">
+        <h2 class="text-light mb-4"><i class="fas fa-question-circle"></i> GAY TEST</h2>
+        <p class="lead">Are You Gay?</p>
+        <div class="d-grid gap-2 d-md-block">
+            <button class="btn btn-lg" id="yesButton">Yes</button>
+            <button class="btn btn-lg" id="noButton">No</button>
+        </div>
+    </div>
+
+    <!-- Elemen audio untuk suara -->
+    <audio id="yesSound" src="sound/I put the new forgis on the jeep.mp3"></audio>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Script untuk menghindar tombol "No" dan menampilkan dialog "Yes" dengan SweetAlert -->
+    <script>
+        const noButton = document.getElementById("noButton");
+        const yesButton = document.getElementById("yesButton");
+        const yesSound = document.getElementById("yesSound");
+
+        // Fungsi untuk menghindari tombol "No"
+        noButton.addEventListener("mouseenter", function() {
+            const randomX = Math.random() * 400 - 100; // Batas horizontal
+            const randomY = Math.random() * 400 - 100; // Batas vertikal
+            noButton.classList.add("animate-move");
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        // Fungsi untuk menampilkan SweetAlert saat tombol "Yes" ditekan
+        yesButton.addEventListener("click", function() {
+            yesSound.play(); // Memutar suara
+            Swal.fire({
+                title: 'Nahh You Gay Bruh💀💀',
+                imageUrl: 'https://media1.tenor.com/m/aTljWQ18YeUAAAAd/rotating-skull.gif', // URL GIF
+                imageWidth: 200,
+                imageHeight: 200,
+                showConfirmButton: false, // Mengatur agar tombol konfirmasi tidak ditampilkan
+                background: '#f5f5f5',
+                color: '#333'
+            }).then(() => {
+                yesSound.pause(); // Menghentikan suara
+                yesSound.currentTime = 0; // Mengatur waktu kembali ke awal
+            });
+        });
+    </script>
+</body>
+</html>
