@@ -99,7 +99,7 @@
 </head>
 <body>
     <div class="container animate__animated animate__fadeInDown">
-        <h2 class="text-light mb-4"><i class="fas fa-question-circle"></i> GAY TEST</h2>
+        <h2 class="text-light mb-4"><i class="fas fa-skull"></i> GAY TEST</h2> <!-- Updated icon here -->
         <p class="lead">Are You Gay?</p>
         <div class="d-grid gap-2 d-md-block">
             <button class="btn btn-lg" id="yesButton">Yes</button>
@@ -122,13 +122,28 @@
         const yesButton = document.getElementById("yesButton");
         const yesSound = document.getElementById("yesSound");
 
+        // Function to check if the device is mobile
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
         // Function to dodge the "No" button
-        noButton.addEventListener("mouseenter", function() {
-            const randomX = Math.random() * 400 - 100; // Horizontal boundary
-            const randomY = Math.random() * 400 - 100; // Vertical boundary
-            noButton.classList.add("animate-move");
+        function dodgeNoButton() {
+            const randomX = Math.random() * 350 - 100; // Horizontal boundary
+            const randomY = Math.random() * 100 - 50; // Vertical boundary
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        });
+        }
+
+        // Add event listeners based on the device type
+        if (!isMobile()) {
+            noButton.addEventListener("mouseenter", function() {
+                dodgeNoButton(); // Dodge on mouse enter for desktop
+            });
+        } else {
+            noButton.addEventListener("click", function() {
+                dodgeNoButton(); // Dodge on click for mobile
+            });
+        }
 
         // Function to show SweetAlert when "Yes" button is clicked
         yesButton.addEventListener("click", function() {
