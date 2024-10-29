@@ -7,9 +7,9 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Animate.css untuk animasi tambahan -->
+    <!-- Animate.css for additional animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- Font Awesome untuk ikon tambahan -->
+    <!-- Font Awesome for additional icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -32,7 +32,8 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 400px;
+            max-width: 90%; /* Adjust for mobile */
+            width: 400px; /* Fixed width for larger screens */
         }
 
         h2 {
@@ -41,7 +42,7 @@
         }
 
         p.lead {
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Slightly larger for readability */
             margin-bottom: 20px;
         }
 
@@ -64,7 +65,7 @@
             position: relative;
         }
 
-        /* Hover efek dan animasi tambahan */
+        /* Hover effects and additional animations */
         #yesButton:hover {
             transform: scale(1.1);
             background-color: #218838;
@@ -75,9 +76,24 @@
             background-color: #c82333;
         }
 
-        /* Efek menghindar dengan animasi halus */
+        /* Effect to dodge the "No" button with smooth animation */
         #noButton.animate-move {
             transition: transform 0.2s ease;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 576px) {
+            h2 {
+                font-size: 1.5rem; /* Smaller font for mobile */
+            }
+
+            p.lead {
+                font-size: 1.2rem; /* Smaller font for mobile */
+            }
+
+            #yesButton, #noButton {
+                font-size: 1rem; /* Smaller buttons for mobile */
+            }
         }
     </style>
 </head>
@@ -91,7 +107,7 @@
         </div>
     </div>
 
-    <!-- Elemen audio untuk suara -->
+    <!-- Audio element for sound -->
     <audio id="yesSound" src="sound/I put the new forgis on the jeep.mp3"></audio>
 
     <!-- Bootstrap JS and Popper.js -->
@@ -100,34 +116,34 @@
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Script untuk menghindar tombol "No" dan menampilkan dialog "Yes" dengan SweetAlert -->
+    <!-- Script to dodge the "No" button and show dialog "Yes" with SweetAlert -->
     <script>
         const noButton = document.getElementById("noButton");
         const yesButton = document.getElementById("yesButton");
         const yesSound = document.getElementById("yesSound");
 
-        // Fungsi untuk menghindari tombol "No"
+        // Function to dodge the "No" button
         noButton.addEventListener("mouseenter", function() {
-            const randomX = Math.random() * 400 - 100; // Batas horizontal
-            const randomY = Math.random() * 400 - 100; // Batas vertikal
+            const randomX = Math.random() * 400 - 100; // Horizontal boundary
+            const randomY = Math.random() * 400 - 100; // Vertical boundary
             noButton.classList.add("animate-move");
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
 
-        // Fungsi untuk menampilkan SweetAlert saat tombol "Yes" ditekan
+        // Function to show SweetAlert when "Yes" button is clicked
         yesButton.addEventListener("click", function() {
-            yesSound.play(); // Memutar suara
+            yesSound.play(); // Play sound
             Swal.fire({
                 title: 'Nahh You Gay Bruh💀💀',
                 imageUrl: 'https://media1.tenor.com/m/aTljWQ18YeUAAAAd/rotating-skull.gif', // URL GIF
                 imageWidth: 200,
                 imageHeight: 200,
-                showConfirmButton: false, // Mengatur agar tombol konfirmasi tidak ditampilkan
+                showConfirmButton: false, // Hide confirm button
                 background: '#f5f5f5',
                 color: '#333'
             }).then(() => {
-                yesSound.pause(); // Menghentikan suara
-                yesSound.currentTime = 0; // Mengatur waktu kembali ke awal
+                yesSound.pause(); // Stop sound
+                yesSound.currentTime = 0; // Reset time to start
             });
         });
     </script>
